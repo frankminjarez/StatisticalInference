@@ -97,7 +97,7 @@ t.test(len~supp, paired=F, var.equal=T, data=n)
 Our early exploratory data analysis indicated the population has a normal distribution so we are assuming that we can use the t-interval test with our small sample set.
 
 1. Both the scatter plot and the box plot indicate that as the dosage increases the effectiveness of the both the methods increases.
-2. Hypothesis and confidence t-interval analysis indicate that for 0.5 and 1.0 dose values OJ is a more effective method. For dosage values of 2.0 both supplements achieve are the same results.
+2. Hypothesis and confidence t-interval analysis indicate that for 0.5 and 1.0 dose values OJ is a more effective method. For dosage values of 2.0 both supplements achieve the same results.
 
 ```{r}
 ```

@@ -33,9 +33,9 @@ set.seed(8080)
 # create sim_data
 sim_data <- data.frame(value = sapply(nsims, function(x) {mean(rexp(n, lambda))}))
 ```
-### Sample Mean Versus Theoretical Mean
+## Sample Mean Versus Theoretical Mean
 
-The sample mean is nearly identical to the theoretical mean.
+#### The sample mean is nearly identical to the theoretical mean.
 ```{r}
 sample_mean <- mean(sim_data$value)
 sample_mean
@@ -65,7 +65,7 @@ legend("topright",
 
 ## Sample Variance vs Theoretical Variance of the Distribution
 
-As you can see below, the sample variance is nearly identical to the theoretical variance.
+### As you can see below, the sample variance is nearly identical to the theoretical variance.
 ```{r}
 simulation_var <- var(sim_data$value)
 simulation_var
@@ -74,7 +74,7 @@ theoretical_var
 ```
 ## Show that the Distribution is Approximately Normal
 
-The simulation samples follow normal distribution. 
+### The simulation samples follow normal distribution. 
 
 The figure below shows the density of the simulations values versus the normal distribution. As you can see the simulation distribution and the theoretical normal distributions are very close to matching.
 ```{r}
@@ -96,7 +96,7 @@ legend("topright", c("Simulated Density", "Normal Distribution Density"),
        bty = "n", lty = c(1,2), col = c("red", "blue"))
 ```
 
-The theoretical quantiles match closely with the simulated quantiles.
+### The theoretical quantiles match closely with the simulated quantiles.
 
 ```{r}
 qqnorm(sim_data$value, 
@@ -107,7 +107,7 @@ legend("bottomright", c("Simulated", "Normal"),
        bty = "n", lty = c(1,1), col = c("red", "blue"))
 ```
 
-Finally, we compare 95% confidence intervals. We see that they nearly match too.
+### Finally, we compare 95% confidence intervals. We see that they nearly match too.
 
 ```{r}
 simulation_interval <- round (mean(sim_data$value) + c(-1,1)*1.96*sd(sim_data$value)/sqrt(n),3)
