@@ -1,0 +1,99 @@
+---
+title: "Statistical Inference: Basic Inferential Data Analysis Instructions"
+author: "Frank Minjarez"
+date: "3/13/2017"
+---
+
+Now in the second portion of the project, we're going to analyze the ToothGrowth data in the R datasets package.
+
+1. Load the ToothGrowth data and perform some basic exploratory data analyses
+2. Provide a basic summary of the data.
+3. Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use the techniques from class, even if there's other approaches worth considering)
+4. State your conclusions and the assumptions needed for your conclusions.
+
+
+##  1. Load the ToothGrowth data and perform some basic exploratory data analyses
+```{r}
+library(datasets)
+data(ToothGrowth)
+head(ToothGrowth)
+```
+
+### The population of the dataset appears to have a normal distribution
+
+```{r}
+hist(ToothGrowth$len, 
+     breaks = 15, 
+     prob = TRUE, 
+     main = "ToothGrowth Versus Normal Distribution", 
+     xlab = "Observations")
+
+## Sample density
+lines(density(ToothGrowth$len), col="red")
+
+## Theoretical normal density
+xnorm <- seq(min(ToothGrowth$len), max(ToothGrowth$len), length = 15)
+ynorm <- dnorm(xnorm, mean = mean(ToothGrowth$len), sd = sd(ToothGrowth$len))
+lines(xnorm, ynorm, pch = 22, col = "blue", lty = 2)
+
+legend("topright", c("ToothGrowth", "Normal"), 
+       bty = "n", lty = c(1,2), col = c("red", "blue"))
+
+str(ToothGrowth)
+```
+## 2. Provide a basic summary of the data
+```{r}
+library(ggplot2)
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+table(ToothGrowth$supp, ToothGrowth$dose)
+summary(ToothGrowth)
+
+# Caclulate mean tooth len
+meanToothLen <- aggregate(len~.,data=ToothGrowth,mean)
+# Scatter plot and the avg lines for the average length
+g <- ggplot(ToothGrowth,aes(x=dose,y=len))
+g <- g + geom_point(aes(group=supp, colour=supp))
+g <- g + scale_x_discrete("Dosage (Milligram)")
+g <- g + scale_y_continuous("Length of Teeth") 
+g <- g + geom_line(data=meanToothLen,aes(group=supp,colour=supp))
+g + ggtitle("Scatter Plot: Effect of Dosage and Supplement on Tooth Growth")
+
+g <- ggplot(ToothGrowth, aes(x=factor(dose),y=len, fill=factor(dose)))
+g <- g + geom_boxplot(notch=F) + facet_grid(.~supp)
+g <- g + scale_x_discrete("Dosage (Milligram)")
+g <- g + scale_y_continuous("Length of Teeth")
+g + ggtitle("Box Plot: Effect of Dosage and Supplement on Tooth Growth")
+```
+
+## 3. Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose
+
+### Low p-value and higher mean len. OJ is more effective at 0.5 dosage.
+```{r}
+
+n <- subset(ToothGrowth, dose == 0.5)
+t.test(len~supp, paired=F, var.equal=T, data=n)
+```
+
+
+### Low p-value and higher mean len. OJ is more effective at 1 dosage.
+```{r}
+n <- subset(ToothGrowth, dose == 1)
+t.test(len~supp, paired=F, var.equal=T, data=n)
+```
+
+### High p-value and equal mean len. OJ and VC have the same effect at 2 dosage.
+
+```{r}
+n <- subset(ToothGrowth, dose == 2)
+t.test(len~supp, paired=F, var.equal=T, data=n)
+```
+
+## 4. State your conclusions and the assumptions needed for your conclusions
+
+Our early exploratory data analysis indicated the population has a normal distribution so we are assuming that we can use the t-interval test with our small sample set.
+
+1. Both the scatter plot and the box plot indicate that as the dosage increases the effectiveness of the both the methods increases.
+2. Hypothesis and confidence t-interval analysis indicate that for 0.5 and 1.0 dose values OJ is a more effective method. For dosage values of 2.0 both supplements achieve are the same results.
+
+```{r}
+```
