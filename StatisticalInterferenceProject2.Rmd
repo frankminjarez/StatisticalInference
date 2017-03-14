@@ -1,8 +1,11 @@
 ---
-title: "Statistical Inference: Basic Inferential Data Analysis Instructions"
+title: 'Statistical Inference Project 1: Part2 Basic Inferential Data Analysis'
 author: "Frank Minjarez"
 date: "3/13/2017"
+output: html_document
+keep_md: yes
 ---
+Code Here: https://github.com/frankminjarez/StatisticalInference.git
 
 Now in the second portion of the project, we're going to analyze the ToothGrowth data in the R datasets package.
 
@@ -13,6 +16,7 @@ Now in the second portion of the project, we're going to analyze the ToothGrowth
 
 
 ##  1. Load the ToothGrowth data and perform some basic exploratory data analyses
+
 ```{r}
 library(datasets)
 data(ToothGrowth)

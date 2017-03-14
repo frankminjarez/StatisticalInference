@@ -1,8 +1,12 @@
 ---
-title: "Exponential Distribution <code>rexp(40, 0.2)</code> Versus Central Limit Theorem"
+title: "Statistical Inference Project 1: Part1 Exponential Distribution Versus Central Limit Theorem"
 author: "Frank Minjarez"
 date: "March 13, 2017"
+output: html_document
+keep_md: true
 ---
+Code Here: https://github.com/frankminjarez/StatisticalInference.git
+
 ## Overview
 In this project we investigate the exponential distribution in R and compare it with the Central Limit Theorem. The exponential distribution is simulated in R with rexp(n, lambda) where lambda is the rate parameter. The mean of exponential distribution is 1/lambda and the standard deviation is also 1/lambda. We set lambda = 0.2 for all of the simulations. We investigate the distribution of averages of 40 exponentials using one thousand simulations.
 
